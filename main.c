@@ -30,9 +30,9 @@ void game_loop()
 	while ((key = getchar()) != '.') {
 
 		if (write(fd, &key, 1) > 0)
-			printf("Sent %c", key);
+			printf(" <- Sent !\n", key);
 		else
-			printf("Error sending %c", key);	
+			printf("Error sending %c \n", key);	
 	}
 }
 
