@@ -1,9 +1,20 @@
+#ifdef __unix__         
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <fcntl.h>
 #include <errno.h>
 #include <sys/types.h>
 #include <unistd.h>
+
+#elif defined(_WIN32) || defined(WIN32) 
+
+#define OS_Windows
+
+#include <stdio.h>
+#include <stdlib.h>
+
+#endif
 
 
 int main(int argc, char* argv[])
