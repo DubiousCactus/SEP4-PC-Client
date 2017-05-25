@@ -23,6 +23,7 @@ int main(int argc, char* argv[])
 	ssize_t ret_in, ret_out;
 	char buffer[1024];
 
+	#ifndef OS_Windows
 	fd = open("/dev/ttyUSB0", O_RDWR);
 
 	if (fd == -1) {
@@ -36,6 +37,7 @@ int main(int argc, char* argv[])
 	}
 
 	close(fd);
+	#endif
 
 	return 0;
 }
