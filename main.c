@@ -21,19 +21,26 @@ int fd;
 void game_loop()
 {
 	char key = 0;
+	char buff[1024] = {0};
 	
 	printf("Starting game loop...\n\n");
 	
 	/* use system call to make terminal send all keystrokes directly to stdin */
 	system ("/bin/stty raw");
 
-	while ((key = getchar()) != '.') {
+		write(fd, "abcdefg", 7);
+	/*while ((key = getchar()) != '.') {
 
-		if (write(fd, &key, 1) > 0)
+		if (write(fd, &key, 1) > 0) {
 			printf(" <- Sent !\n", key);
-		else
-			printf("Error sending %c \n", key);	
-	}
+			if (read(fd, &buff, 1024))
+				printf("%s", buff);
+		} else {
+			printf("Error sending %c \n", key);
+		}
+
+		sleep(3000);
+	}*/
 }
 
 int main(int argc, char* argv[])
@@ -49,16 +56,7 @@ int main(int argc, char* argv[])
 		return 2;
 	}
 
-	if (write(fd, "hello", 5) > 0) {
-		if (read(fd, &buffer, 1024) > 0) {
-			printf("Received: %s\n\n", buffer);
-			game_loop();
-		} else {
-			printf("Game controller didn't respond !");
-		}
-	} else {
-		printf("Error sending \"hello\"");
-	}
+	game_loop();
 	
 	close(fd);
 
